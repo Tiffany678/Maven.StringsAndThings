@@ -1,4 +1,5 @@
 package io.zipcoder;
+import java.util.*;
 
 
 /**
@@ -36,21 +37,25 @@ public class StringsAndThings {
      *           removeString("Hello there", "x") // Should return "Hello there"
      */
     public String removeString(String base, String remove) {
-        //check if the base String contains the remove String, if no, then return the base String
-        // If yes, the using the forLoop to iterate each chariter and skip adding the length of remove to result
-        //then loop the remove each character to check if they are equal
+        //check if the base String contains the remove String, if no, then return the complete base String
+        // If yes, the using the forLoop to iterate each chariter and find the first character fron the remove String
+            // When we find the remove.charAt(0) in the base String, using the subString(i,i+remove.length) to compare the remove String
+            //If they are equal, i will skip those remove.length, then search the next (i+remove.length)
 
         String result = "";
-
         if (base.contains(remove)) {
             for (int i = 0; i < base.length(); i++) {
                 if (base.charAt(i) != remove.charAt(0)) {
                     result += base.charAt(i);
                 } else {
-                    String baseSub = base.substring(i, i+remove.length());
-                        if(baseSub.equals(remove)){
-                            i+=remove.length()-1;
-                        }
+                    if((base.length()-i-1)<remove.length()){
+                        break;
+                    } else {
+                            String baseSub = base.substring(i, i + remove.length());
+                            if (baseSub.equals(remove)) {
+                                i += remove.length() - 1;
+                            }
+                    }
                 }
             }
         } else {
@@ -69,7 +74,15 @@ public class StringsAndThings {
      *           containsEqualNumberOfIsAndNot("noisxxnotyynotxisi") // Should return true
      */
     public Boolean containsEqualNumberOfIsAndNot(String input){
-        return null;
+        //using for loop, looking for character 'i' in input, if yes, then compare the next character to see if it is == to 's';
+
+       String isString = removeString(input, "is");
+       int isCount = (input.length()-isString.length())/2;
+
+        String notString = removeString(input, "not");
+        int notCount = (input.length()-notString.length())/3;
+
+       return (isCount==notCount);
     }
 
     /**
@@ -96,9 +109,14 @@ public class StringsAndThings {
          *            countTriple("xxxabyyyycd") // Should return 3
          *            countTriple("a") // Should return 0
          */
-    public Integer countTriple(String input){
-       int counter=0;
+    public Integer countTriple(String input) {
+        int counter = 0;
+        for (int i = 0; i < input.length() - 2; i++) {
+            if (input.charAt(i) == input.charAt(i + 1) && input.charAt(i + 1) == input.charAt(i + 2)) {
+                counter++;
+            }
 
-
+        }
+        return counter;
     }
 }
