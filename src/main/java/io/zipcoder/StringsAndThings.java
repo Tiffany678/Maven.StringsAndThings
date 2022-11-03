@@ -15,7 +15,15 @@ public class StringsAndThings {
      *           countYZ("day fyyyz"); // Should return 2
      */
     public Integer countYZ(String input){
-        return null;
+        int counter=0;
+        String[] in = input.split(" ");
+
+        for(String value: in){
+            if(value.charAt(value.length()-1)=='y' || value.charAt(value.length()-1)=='z'){
+                counter++;
+            }
+        }
+        return counter;
     }
 
     /**
@@ -27,8 +35,29 @@ public class StringsAndThings {
      *           removeString("Hello there", "e") //  Should return "Hllo thr"
      *           removeString("Hello there", "x") // Should return "Hello there"
      */
-    public String removeString(String base, String remove){
-        return null;
+    public String removeString(String base, String remove) {
+        //check if the base String contains the remove String, if no, then return the base String
+        // If yes, the using the forLoop to iterate each chariter and skip adding the length of remove to result
+        //then loop the remove each character to check if they are equal
+
+        String result = "";
+
+        if (base.contains(remove)) {
+            for (int i = 0; i < base.length(); i++) {
+                if (base.charAt(i) != remove.charAt(0)) {
+                    result += base.charAt(i);
+                } else {
+                    String baseSub = base.substring(i, i+remove.length());
+                        if(baseSub.equals(remove)){
+                            i+=remove.length()-1;
+                        }
+                }
+            }
+        } else {
+
+            return base;
+        }
+        return result;
     }
 
     /**
@@ -50,19 +79,26 @@ public class StringsAndThings {
      *           gHappy("xxgxx") // Should return  false
      *           gHappy("xxggyygxx") // Should return  false
      */
-    public Boolean gIsHappy(String input){
-        return null;
+    public Boolean gIsHappy(String input) {
+
+        for (int i = 0; i < (input.length() - 2); i++) {
+            if (input.charAt(i) == 'g' && input.charAt(i + 1) == 'g') {
+               return true;
+            }
+        }
+        return false;
     }
 
-
-    /**
-     * We'll say that a "triple" in a string is a char appearing three times in a row.
-     * Return the number of triples in the given string. The triples may overlap.
-     * example :  countTriple("abcXXXabc") // Should return 1
-     *            countTriple("xxxabyyyycd") // Should return 3
-     *            countTriple("a") // Should return 0
-     */
+        /**
+         * We'll say that a "triple" in a string is a char appearing three times in a row.
+         * Return the number of triples in the given string. The triples may overlap.
+         * example :  countTriple("abcXXXabc") // Should return 1
+         *            countTriple("xxxabyyyycd") // Should return 3
+         *            countTriple("a") // Should return 0
+         */
     public Integer countTriple(String input){
-        return null;
+       int counter=0;
+
+
     }
 }
